@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapter 07 Café | Every cup, a new chapter</title>
+<meta name="description" content="Chapter 07 Café - specialty coffee, fresh bites and a cozy corner to read, work and unwind.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#14100d;
+  --bg2:#1c1612;
+  --card:#241c16;
+  --cream:#f5ede1;
+  --muted:#b9a995;
+  --accent:#e0a458;
+  --accent2:#c97b3d;
+  --line:rgba(245,237,225,.12);
+  --radius:20px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--cream);line-height:1.6;overflow-x:hidden}
+h1,h2,h3{font-family:'Fraunces',serif;font-weight:600;line-height:1.1}
+a{color:inherit;text-decoration:none}
+.wrap{width:min(1100px,100% - 40px);margin-inline:auto}
+section{padding:90px 0}
+.eyebrow{font-size:.78rem;letter-spacing:.25em;text-transform:uppercase;color:var(--accent);font-weight:600;margin-bottom:14px;display:block}
+h2{font-size:clamp(2rem,5vw,3.2rem);margin-bottom:18px}
+.lead{color:var(--muted);max-width:560px}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(20,16,13,.75);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;height:68px}
+.logo{font-family:'Fraunces',serif;font-size:1.25rem;font-weight:600}
+.logo span{color:var(--accent)}
+.links{display:flex;gap:28px;align-items:center;font-size:.92rem;color:var(--muted)}
+.links a:hover{color:var(--cream)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:999px;font-weight:600;font-size:.95rem;border:1px solid transparent;cursor:pointer;transition:.25s}
+.btn-primary{background:var(--accent);color:#1a120b}
+.btn-primary:hover{background:var(--cream);transform:translateY(-2px)}
+.btn-ghost{border-color:var(--line);color:var(--cream)}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+.menu-toggle{display:none;background:none;border:0;color:var(--cream);font-size:1.6rem;cursor:pointer}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;position:relative;padding-top:110px;
+  background:
+   radial-gradient(900px 500px at 85% 20%,rgba(224,164,88,.22),transparent 60%),
+   radial-gradient(700px 500px at 0% 100%,rgba(201,123,61,.18),transparent 60%),
+   var(--bg)}
+.hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:50px;align-items:center}
+.chapter-tag{display:inline-flex;gap:10px;align-items:center;padding:8px 16px;border:1px solid var(--line);border-radius:999px;font-size:.82rem;color:var(--muted);margin-bottom:26px}
+.chapter-tag b{color:var(--accent)}
+.hero h1{font-size:clamp(2.8rem,8vw,5.6rem);margin-bottom:22px}
+.hero h1 em{font-style:italic;color:var(--accent);font-weight:400}
+.hero p{color:var(--muted);font-size:1.08rem;max-width:480px;margin-bottom:34px}
+.cta{display:flex;gap:14px;flex-wrap:wrap}
+.hero-art{position:relative;aspect-ratio:4/5;border-radius:200px 200px 28px 28px;
+  background:linear-gradient(160deg,#3a2a1d,#1f1610 60%,#2b1d12);
+  border:1px solid var(--line);display:grid;place-items:center;overflow:hidden}
+.hero-art .cup{font-size:7rem;filter:drop-shadow(0 20px 30px rgba(0,0,0,.5));animation:float 5s ease-in-out infinite}
+.hero-art::before{content:"07";position:absolute;font-family:'Fraunces',serif;font-size:14rem;font-weight:600;color:rgba(224,164,88,.08);bottom:-40px;right:-10px}
+.badge{position:absolute;left:14px;bottom:18px;background:var(--cream);color:#1a120b;padding:10px 16px;border-radius:14px;font-size:.8rem;font-weight:600}
+@keyframes float{50%{transform:translateY(-14px) rotate(3deg)}}
+
+/* MARQUEE */
+.marquee{border-block:1px solid var(--line);overflow:hidden;padding:18px 0;background:var(--bg2)}
+.marquee-track{display:flex;gap:50px;width:max-content;animation:scroll 28s linear infinite;font-family:'Fraunces',serif;font-size:1.3rem;color:var(--muted)}
+.marquee-track span::after{content:"✦";color:var(--accent);margin-left:50px}
+@keyframes scroll{to{transform:translateX(-50%)}}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:34px}
+.stat{padding:20px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius)}
+.stat b{display:block;font-family:'Fraunces',serif;font-size:1.9rem;color:var(--accent)}
+.stat small{color:var(--muted)}
+.about-visual{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.tile{border-radius:var(--radius);display:grid;place-items:center;font-size:3.4rem;border:1px solid var(--line);aspect-ratio:1}
+.t1{background:linear-gradient(135deg,#3b2a1c,#241911)}
+.t2{background:linear-gradient(135deg,#e0a458,#c97b3d);transform:translateY(28px)}
+.t3{background:linear-gradient(135deg,#2a2018,#3d2d20)}
+.t4{background:linear-gradient(135deg,#4a3524,#2a1d13);transform:translateY(28px)}
+
+/* MENU */
+#menu{background:var(--bg2)}
+.tabs{display:flex;gap:10px;flex-wrap:wrap;margin:30px 0 36px}
+.tab{padding:10px 22px;border-radius:999px;border:1px solid var(--line);background:none;color:var(--muted);cursor:pointer;font:600 .9rem 'Inter',sans-serif;transition:.2s}
+.tab.active,.tab:hover{background:var(--accent);color:#1a120b;border-color:var(--accent)}
+.menu-list{display:none;grid-template-columns:1fr 1fr;gap:18px}
+.menu-list.show{display:grid;animation:fade .4s}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}}
+.item{display:flex;gap:16px;align-items:flex-start;padding:20px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);transition:.25s}
+.item:hover{border-color:var(--accent);transform:translateY(-3px)}
+.item .ic{font-size:2rem;flex-shrink:0}
+.item h3{font-size:1.15rem;display:flex;justify-content:space-between;gap:10px;margin-bottom:4px}
+.item h3 span{color:var(--accent);font-family:'Inter',sans-serif;font-size:1rem}
+.item p{color:var(--muted);font-size:.88rem}
+.note{margin-top:26px;color:var(--muted);font-size:.85rem}
+
+/* SPECIAL */
+.special{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#1a120b;border-radius:28px;padding:50px;display:flex;justify-content:space-between;align-items:center;gap:30px;flex-wrap:wrap}
+.special h2{margin:0 0 8px}
+.special p{max-width:480px;opacity:.85}
+.special .btn{background:#1a120b;color:var(--cream)}
+
+/* GALLERY */
+.gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:36px}
+.g{border-radius:var(--radius);aspect-ratio:1;display:grid;place-items:center;font-size:3rem;border:1px solid var(--line);transition:.3s}
+.g:hover{transform:scale(1.03)}
+.g:nth-child(1){background:linear-gradient(135deg,#3b2a1c,#1d140d);grid-row:span 2;aspect-ratio:auto}
+.g:nth-child(2){background:linear-gradient(135deg,#c97b3d,#7a4a22)}
+.g:nth-child(3){background:linear-gradient(135deg,#2a2018,#44321f)}
+.g:nth-child(4){background:linear-gradient(135deg,#e0a458,#b37a35)}
+.g:nth-child(5){background:linear-gradient(135deg,#4a3524,#241911)}
+.g:nth-child(6){background:linear-gradient(135deg,#34261a,#5a3f26)}
+
+/* REVIEWS */
+.reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:36px}
+.review{padding:26px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius)}
+.stars{color:var(--accent);letter-spacing:3px;margin-bottom:10px}
+.review p{color:var(--muted);font-size:.92rem;margin-bottom:16px}
+.review b{font-size:.88rem}
+
+/* CONTACT */
+#contact{background:var(--bg2)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.info{display:grid;gap:16px;margin-top:26px}
+.info div{display:flex;gap:14px;padding:18px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius)}
+.info .ic{font-size:1.4rem}
+.info small{color:var(--muted);display:block}
+form{display:grid;gap:14px;padding:30px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius)}
+input,select,textarea{width:100%;padding:14px 16px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--cream);font:inherit}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--accent);border-color:transparent}
+textarea{min-height:90px;resize:vertical}
+
+footer{padding:36px 0 90px;text-align:center;color:var(--muted);font-size:.85rem;border-top:1px solid var(--line)}
+.wa-float{position:fixed;right:18px;bottom:18px;z-index:60;background:#25d366;color:#fff;padding:14px 22px;border-radius:999px;font-weight:600;box-shadow:0 10px 30px rgba(0,0,0,.4);display:flex;gap:8px;align-items:center}
+
+.reveal{opacity:0;transform:translateY(28px);transition:.8s}
+.reveal.in{opacity:1;transform:none}
+
+@media(max-width:860px){
+  section{padding:64px 0}
+  .links{position:absolute;top:68px;left:0;right:0;flex-direction:column;background:var(--bg);padding:22px;gap:18px;border-bottom:1px solid var(--line);display:none}
+  .links.open{display:flex}
+  .menu-toggle{display:block}
+  .hero-grid,.about-grid,.contact-grid{grid-template-columns:1fr}
+  .hero-art{max-width:320px;margin:10px auto 0}
+  .menu-list{grid-template-columns:1fr}
+  .reviews{grid-template-columns:1fr}
+  .gallery{grid-template-columns:repeat(2,1fr)}
+  .g:nth-child(1){grid-row:auto;aspect-ratio:1}
+  .special{padding:32px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-in">
+    <a href="#home" class="logo">Chapter <span>07</span> Café</a>
+    <button class="menu-toggle" id="toggle" aria-label="Menu">☰</button>
+    <div class="links" id="links">
+      <a href="#about">Our Story</a>
+      <a href="#menu">Menu</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#contact">Contact</a>
+      <a href="#contact" class="btn btn-primary">Book a Table</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="home">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="chapter-tag"><b>Chapter 07</b> · Now Brewing</span>
+      <h1>Every cup, <em>a new</em> chapter.</h1>
+      <p>Specialty coffee, fresh bites and a cozy corner to read, work and unwind. Your next favourite chapter starts here.</p>
+      <div class="cta">
+        <a href="#menu" class="btn btn-primary">Explore Menu</a>
+        <a href="https://wa.me/918053150707?text=Hi%20Chapter%2007%20Caf%C3%A9%2C%20I%20want%20to%20order" class="btn btn-ghost">Order on WhatsApp</a>
+      </div>
+    </div>
+    <div class="hero-art">
+      <div class="cup">☕</div>
+      <div class="badge">Freshly roasted daily</div>
+    </div>
+  </div>
+</header>
+
+<div class="marquee">
+  <div class="marquee-track">
+    <span>Specialty Coffee</span><span>Cold Brew</span><span>Fresh Bakes</span><span>Cozy Reading Corner</span><span>Free Wi-Fi</span><span>Live Music Fridays</span>
+    <span>Specialty Coffee</span><span>Cold Brew</span><span>Fresh Bakes</span><span>Cozy Reading Corner</span><span>Free Wi-Fi</span><span>Live Music Fridays</span>
+  </div>
+</div>
+
+<section id="about">
+  <div class="wrap about-grid">
+    <div class="reveal">
+      <span class="eyebrow">Our Story</span>
+      <h2>A café written for slow mornings.</h2>
+      <p class="lead">Chapter 07 is where good coffee meets good company. Pick a book from our shelf, grab your favourite brew and let the day unfold at your own pace.</p>
+      <div class="stats">
+        <div class="stat"><b>25+</b><small>Menu items</small></div>
+        <div class="stat"><b>4.8★</b><small>Guest rating</small></div>
+        <div class="stat"><b>7 AM</b><small>We open</small></div>
+      </div>
+    </div>
+    <div class="about-visual reveal">
+      <div class="tile t1">📖</div>
+      <div class="tile t2">☕</div>
+      <div class="tile t3">🥐</div>
+      <div class="tile t4">🎶</div>
+    </div>
+  </div>
+</section>
+
+<section id="menu">
+  <div class="wrap">
+    <span class="eyebrow">The Menu</span>
+    <h2>Pick your chapter.</h2>
+    <p class="lead">Made fresh, served warm. Tap a category to explore.</p>
+
+    <div class="tabs" id="tabs">
+      <button class="tab active" data-t="hot">Hot Coffee</button>
+      <button class="tab" data-t="cold">Cold &amp; Iced</button>
+      <button class="tab" data-t="bites">Bites</button>
+      <button class="tab" data-t="sweet">Desserts</button>
+    </div>
+
+    <div class="menu-list show" id="hot">
+      <div class="item"><div class="ic">☕</div><div><h3>Classic Espresso <span>₹120</span></h3><p>Bold, rich and smooth. A double shot to start the day.</p></div></div>
+      <div class="item"><div class="ic">🥛</div><div><h3>Chapter Latte <span>₹180</span></h3><p>Our signature creamy latte with a hint of caramel.</p></div></div>
+      <div class="item"><div class="ic">☕</div><div><h3>Cappuccino <span>₹160</span></h3><p>Equal parts espresso, steamed milk and velvety foam.</p></div></div>
+      <div class="item"><div class="ic">🍫</div><div><h3>Hot Mocha <span>₹200</span></h3><p>Espresso meets dark chocolate, topped with cream.</p></div></div>
+    </div>
+
+    <div class="menu-list" id="cold">
+      <div class="item"><div class="ic">🧊</div><div><h3>Cold Brew <span>₹190</span></h3><p>Steeped for 18 hours. Smooth, low acidity, super refreshing.</p></div></div>
+      <div class="item"><div class="ic">🥤</div><div><h3>Iced Caramel Latte <span>₹210</span></h3><p>Chilled espresso, milk and buttery caramel drizzle.</p></div></div>
+      <div class="item"><div class="ic">🍋</div><div><h3>Mint Lemon Cooler <span>₹140</span></h3><p>Fresh lemon, mint and soda. Pure summer in a glass.</p></div></div>
+      <div class="item"><div class="ic">🍓</div><div><h3>Strawberry Frappé <span>₹220</span></h3><p>Blended strawberries, milk and ice. Thick and fruity.</p></div></div>
+    </div>
+
+    <div class="menu-list" id="bites">
+      <div class="item"><div class="ic">🥪</div><div><h3>Grilled Veg Sandwich <span>₹170</span></h3><p>Multigrain bread, veggies, cheese and house sauce.</p></div></div>
+      <div class="item"><div class="ic">🍝</div><div><h3>Creamy Pesto Pasta <span>₹260</span></h3><p>Penne in basil pesto with olives and parmesan.</p></div></div>
+      <div class="item"><div class="ic">🥐</div><div><h3>Butter Croissant <span>₹130</span></h3><p>Flaky, golden and baked fresh every morning.</p></div></div>
+      <div class="item"><div class="ic">🍟</div><div><h3>Peri Peri Fries <span>₹150</span></h3><p>Crispy fries tossed in our spicy peri peri mix.</p></div></div>
+    </div>
+
+    <div class="menu-list" id="sweet">
+      <div class="item"><div class="ic">🍰</div><div><h3>Tiramisu Jar <span>₹210</span></h3><p>Coffee-soaked layers with mascarpone cream.</p></div></div>
+      <div class="item"><div class="ic">🍫</div><div><h3>Choco Lava Cake <span>₹180</span></h3><p>Warm, gooey centre. Best with a scoop of ice cream.</p></div></div>
+      <div class="item"><div class="ic">🧇</div><div><h3>Nutella Waffle <span>₹200</span></h3><p>Crisp waffle, Nutella, banana and crushed hazelnuts.</p></div></div>
+      <div class="item"><div class="ic">🍪</div><div><h3>Choco Chip Cookie <span>₹90</span></h3><p>Big, chewy and loaded with chocolate chunks.</p></div></div>
+    </div>
+
+    <p class="note">* Demo menu. Items and prices are sample content.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="special reveal">
+      <div>
+        <h2>Coffee + Book Combo</h2>
+        <p>Order any hot coffee with a dessert and enjoy a free hour in our reading corner. Available all week, 2 PM to 6 PM.</p>
+      </div>
+      <a href="https://wa.me/918053150707?text=Hi%2C%20I%20want%20the%20Coffee%20%2B%20Book%20Combo" class="btn">Claim Offer</a>
+    </div>
+  </div>
+</section>
+
+<section id="gallery">
+  <div class="wrap">
+    <span class="eyebrow">Gallery</span>
+    <h2>Moments, served daily.</h2>
+    <div class="gallery reveal">
+      <div class="g">☕</div><div class="g">🥐</div><div class="g">📚</div>
+      <div class="g">🍰</div><div class="g">🎶</div><div class="g">🌿</div>
+    </div>
+  </div>
+</section>
+
+<section id="reviews" style="background:var(--bg2)">
+  <div class="wrap">
+    <span class="eyebrow">Reviews</span>
+    <h2>What guests say.</h2>
+    <div class="reviews">
+      <div class="review reveal"><div class="stars">★★★★★</div><p>Perfect place to sit with a book. The cold brew is the best in town and the staff is lovely.</p><b>Sample Guest A</b></div>
+      <div class="review reveal"><div class="stars">★★★★★</div><p>Great ambience and fast Wi-Fi. I work from here twice a week. The latte never disappoints.</p><b>Sample Guest B</b></div>
+      <div class="review reveal"><div class="stars">★★★★★</div><p>Tiramisu jar and a cappuccino. Instant happiness. Will keep coming back.</p><b>Sample Guest C</b></div>
+    </div>
+    <p class="note">* Demo reviews. Replace with real customer reviews.</p>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap contact-grid">
+    <div class="reveal">
+      <span class="eyebrow">Visit Us</span>
+      <h2>Come write your chapter with us.</h2>
+      <div class="info">
+        <div><span class="ic">📍</span><p><b>Address</b><small>Gali No. 2, Shree Ram Market, Bahalgarh, Sonipat (131021)</small></p></div>
+        <div><span class="ic">🕖</span><p><b>Hours</b><small>Mon–Sun · 7:00 AM – 11:00 PM</small></p></div>
+        <div><span class="ic">📞</span><p><b>Call / WhatsApp</b><small>+91 80531 50707</small></p></div>
+        <div><span class="ic">📸</span><p><b>Instagram</b><small><a href="https://instagram.com/chapter07cafe" target="_blank" rel="noopener">@chapter07cafe</a></small></p></div>
+      </div>
+    </div>
+    <form id="bookForm" class="reveal">
+      <h3 style="font-size:1.5rem">Book a table</h3>
+      <input type="text" id="name" placeholder="Your name" required>
+      <input type="date" id="date" required>
+      <select id="guests"><option>2 guests</option><option>3 guests</option><option>4 guests</option><option>5+ guests</option></select>
+      <textarea id="msg" placeholder="Any special request?"></textarea>
+      <button type="submit" class="btn btn-primary" style="justify-content:center">Send on WhatsApp</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">© 2026 Chapter 07 Café · Demo website</div>
+</footer>
+
+<a class="wa-float" href="https://wa.me/918053150707?text=Hi%20Chapter%2007%20Caf%C3%A9">💬 Order on WhatsApp</a>
+
+<script>
+// Mobile menu
+const links=document.getElementById('links');
+document.getElementById('toggle').onclick=()=>links.classList.toggle('open');
+links.querySelectorAll('a').forEach(a=>a.onclick=()=>links.classList.remove('open'));
+
+// Menu tabs
+document.querySelectorAll('.tab').forEach(btn=>{
+  btn.onclick=()=>{
+    document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.menu-list').forEach(m=>m.classList.remove('show'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.t).classList.add('show');
+  };
+});
+
+// Scroll reveal
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.15});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+// Booking -> WhatsApp
+const WA_NUMBER='918053150707';
+document.getElementById('bookForm').onsubmit=e=>{
+  e.preventDefault();
+  const t=`Hi Chapter 07 Café! I'd like to book a table.%0AName: ${encodeURIComponent(name.value)}%0ADate: ${date.value}%0AGuests: ${encodeURIComponent(guests.value)}%0ANote: ${encodeURIComponent(msg.value)}`;
+  window.open(`https://wa.me/${WA_NUMBER}?text=${t}`,'_blank');
+};
+</script>
+</body>
+</html>
